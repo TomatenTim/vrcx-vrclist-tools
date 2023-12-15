@@ -1,10 +1,12 @@
 import time
 
 from vrcx import get_latest_vrchat_world_ids
-from vrclist import set_world_visited
+from vrclist import set_world_visited, get_worlds_visited
 
 
 def main():
+
+    get_worlds_visited()
 
     while True:
 
@@ -14,6 +16,7 @@ def main():
         # sets the worlds to visited on vrclist
         for world_id in world_ids:
             set_world_visited(world_id)
+            time.sleep(1)
         
         
         time.sleep(5)

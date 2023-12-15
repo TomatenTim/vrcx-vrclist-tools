@@ -59,6 +59,10 @@ def set_world_visited(vrchat_world_id):
     # get world info from vrclist 
     world_data = search_world_by_id(vrchat_world_id)
 
+    if(not world_data):
+        # TODO: log if world not found
+       return
+
     # check if the world was already visited since program start
     if(world_data['id'] in cache_worlds_visited):
         return
@@ -73,3 +77,12 @@ def set_world_visited(vrchat_world_id):
     # if worked store that to prevent sending it again
     if(res.status_code == 200):
         cache_worlds_visited.append(world_data['id'])
+
+
+def get_worlds_visited():
+    res = send_api_request('/user/visited')
+
+    data = res.json()
+
+    for world_data in data:
+        cache_worlds_visited.append(world_data['world_id'])
