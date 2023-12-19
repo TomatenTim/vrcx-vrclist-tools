@@ -1,8 +1,8 @@
 import os
 import sqlite3
 
-vrcxPath = os.getenv('LOCALAPPDATA')+'\\..\\Roaming\\VRCX'
-vrcxDBPath = os.getenv('LOCALAPPDATA')+'\\..\\Roaming\\VRCX\VRCX.sqlite3'
+vrcx_path = os.getenv('LOCALAPPDATA')+'\\..\\Roaming\\VRCX'
+vrcx_db_path = os.getenv('LOCALAPPDATA')+'\\..\\Roaming\\VRCX\VRCX.sqlite3'
 
 
 
@@ -18,7 +18,7 @@ def get_latest_vrchat_world_ids(count = 2, min_time = 0):
         return
 
     # connect to DB
-    connection = sqlite3.connect(vrcxDBPath)
+    connection = sqlite3.connect(vrcx_db_path)
     cursor = connection.cursor()
 
     # select the data from the vrcx database
@@ -26,6 +26,8 @@ def get_latest_vrchat_world_ids(count = 2, min_time = 0):
 
     # get an array with world ids
     worldIDs = set(row[0] for row in cursor.fetchall())
+
+    cursor.close()
 
     return worldIDs
 
